@@ -1,0 +1,15 @@
+# Symlink to Windows Obsidian vault (points outside repo)
+viz
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Runtime / generated
+*.log
+.tmp/
