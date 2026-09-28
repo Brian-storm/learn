@@ -136,7 +136,21 @@ Repeat this full loop per node — don't front-load all the foundations once at 
 
 If you catch yourself asserting a fact he'd have to take on faith — foundational or not — stop: either motivate it and confirm it lands, or ground it in something already established. Unmotivated, unconfirmed facts don't lock in — that's the whole point.
 
-## Formatting — math renders as LaTeX
+## Phase 4 — Save the lesson note (never skip this)
+
+After the teaching session concludes, write a comprehensive lesson note summarizing everything taught. This is mandatory — not optional.
+
+**Location:** Save to `vault/lessons/`. Create the directory if it does not exist. Use a descriptive filename that captures the topic; do not enforce rigid `<course>-<topic>` formatting unless the user prefers it.
+
+**Content must include:**
+1. **Session metadata:** date, course/topic, goal statement.
+2. **The dependency graph:** the full Mermaid DAG from Phase 2, intact.
+3. **Every node taught:** each unconditional truth and derived step, with its motivate-establish-connect logic preserved in prose.
+4. **All visuals generated:** embed every diagram filename produced by maker subagents using Obsidian wikilink syntax (`![[filename.png|width]]`).
+5. **Summary tables:** any comparison tables or "click" moments from the session.
+6. **Self-test questions:** 3–5 questions the user can use to verify retention (answer key is optional).
+
+**This note is the durable artifact.** The live session builds the graph in his head; the lesson note preserves it in the vault for review, spaced repetition, and linking to other notes. Always save it before ending the session.
 
 Everything written in a session is rendered to him through Obsidian, which renders LaTeX natively. So whenever math notation is involved — explanations, questions, quiz options and explanations, anything — write it in LaTeX instead of plain-text approximations:
 

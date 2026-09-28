@@ -13,3 +13,6 @@ __pycache__/
 # Runtime / generated
 *.log
 .tmp/
+
+# My actual learning progress
+courses
