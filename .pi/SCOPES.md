@@ -23,9 +23,10 @@ Everything you **read and review** in Obsidian: notes, course indexes, lecture s
 
 | Category | Path |
 |---|---|
-| Session notes | `lessons/<topic>.md` |
-| Course indexes | `Courses/<course>.md` |
-| Raw materials | `Ongoing/<course>/` (`.pptx`, `.pdf`) |
+| Course indexes | `Courses/<course>/Course.md` |
+| Source materials | `Courses/<course>/Sources/` (`.pptx`, `.pdf`, converted text) |
+| Course notes and exercises | `Courses/<course>/Notes/`, `Courses/<course>/Exercises/` |
+| General notes | `Notes/<topic>.md` |
 | Rendered diagrams | `viz/*.png` |
 | Workflow reference | `WORKFLOW.md` |
 
@@ -37,8 +38,9 @@ Everything you **read and review** in Obsidian: notes, course indexes, lecture s
 |---|---|
 | Writing a pi skill or agent definition | `ai-learning/.pi/…` |
 | Adding an extension or tool | `ai-learning/.pi/extensions/…` |
-| Creating a lesson note to read later | `vault/lessons/` |
-| Dropping in lecture slides | `vault/Ongoing/<course>/` |
+| Creating a course lesson note to read later | `vault/Courses/<course>/Notes/Lectures/` |
+| Creating a general note | `vault/Notes/` |
+| Dropping in lecture slides | `vault/Courses/<course>/Sources/Lectures/` |
 | Writing a course overview | `vault/Courses/` |
 | Publishing a diagram from a subagent | `ai-learning/viz/` (lands in `vault/viz/`) |
 

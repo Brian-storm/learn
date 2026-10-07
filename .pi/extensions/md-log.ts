@@ -35,11 +35,51 @@ const QA_TOOLS = new Set(["quiz", "ask_user_question"]);
  * Where auto-linking looks for a session-named note.
  *
  * `~/.pi/agent/extensions/` config is not used here; this is a project-level
- * convenience and the path is a symlink into the Obsidian vault. Override with
- * PI_MD_LOG_DIR if the vault moves.
+ * convenience. The default root is the vault symlink; override with PI_MD_LOG_DIR
+ * if the vault moves. Matching searches root Notes/ and Courses/*/Notes/.
  */
-const AUTO_LINK_DIR =
-	process.env.PI_MD_LOG_DIR || path.join(process.env.HOME || "", "vault", "lessons");
+const AUTO_LINK_ROOT =
+	process.env.PI_MD_LOG_DIR || path.join(process.env.HOME || "", "vault");
+
+/** Find only study-note folders, never source conversions or arbitrary vault notes. */
+function autoLinkNoteDirs(root: string): string[] {
+	const dirs: string[] = [];
+	const addIfDirectory = (dir: string) => {
+		try {
+			if (fs.statSync(dir).isDirectory()) dirs.push(dir);
+		} catch {
+			/* Missing folder is fine. */
+		}
+	};
+
+	addIfDirectory(path.join(root, "Notes"));
+	const coursesDir = path.join(root, "Courses");
+	try {
+		for (const entry of fs.readdirSync(coursesDir, { withFileTypes: true })) {
+			if (entry.isDirectory()) addIfDirectory(path.join(coursesDir, entry.name, "Notes"));
+		}
+	} catch {
+		/* No course folders yet. */
+	}
+
+	// Preserve support for a custom flat PI_MD_LOG_DIR when no course layout exists.
+	if (dirs.length === 0) addIfDirectory(root);
+	return dirs;
+}
+
+function markdownFilesUnder(dir: string): string[] {
+	const files: string[] = [];
+	try {
+		for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+			const fullPath = path.join(dir, entry.name);
+			if (entry.isDirectory()) files.push(...markdownFilesUnder(fullPath));
+			else if (entry.isFile() && entry.name.toLowerCase().endsWith(".md")) files.push(fullPath);
+		}
+	} catch {
+		/* Missing or unreadable directory — skip it. */
+	}
+	return files;
+}
 
 /**
  * Extract the session's display name from its session-file path.
@@ -91,17 +131,8 @@ export default function mdLog(pi: ExtensionAPI) {
 			return;
 		}
 
-		// Auto-link: if this session has a NAME, link it to a note of that name
-		// inside the vault's lessons/ folder when one exists.
-		//
-		// Naming the session is the whole contract: `learn --session-id divide-and
-		// -conquer` (or /name) maps to vault/lessons/<that name>.md, with no
-		// /md-log typing required.
-		//
-		// The note must still ALREADY EXIST — this never creates files. That is the
-		// original design decision, kept deliberately: a typo'd path must not
-		// scatter notes across the vault. Auto-linking only *finds* a note the user
-		// already made.
+		// Auto-link a named session to an existing note in the general Notes folder
+		// or a course's Notes folder. Never create a note, and skip ambiguous matches.
 		//
 		// NOTE: ctx.sessionManager.getSessionName() returns undefined on
 		// session_start in this version of pi, so the name is taken from the
@@ -109,40 +140,21 @@ export default function mdLog(pi: ExtensionAPI) {
 		const sessionName = sessionNameFromFile(ctx.sessionManager.getSessionFile?.());
 		if (!sessionName) return;
 
-		// Session ids are restricted to [A-Za-z0-9._-] (no spaces), but notes in the
-		// vault are free-form ("divide and conquer.md"). So try the name verbatim
-		// first, then a few normalised variants, and take the first note that
-		// exists. We only ever LOOK for an existing file — never create one.
 		const slug = sessionName.trim();
-		const variants = [
-			slug,
-			slug.replace(/[-_]+/g, " "), // auto-link-test  -> "auto link test"
-			slug.replace(/[._-]+/g, " "),
-		];
-		// Also try any note whose name, reduced to the same shape, matches.
 		const normalise = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "");
-		let found: string | undefined;
-		for (const v of variants) {
-			const p = path.join(AUTO_LINK_DIR!, v + ".md");
-			if (fs.existsSync(p)) {
-				found = p;
-				break;
-			}
+		const target = normalise(slug);
+		const matches = autoLinkNoteDirs(AUTO_LINK_ROOT)
+			.flatMap(markdownFilesUnder)
+			.filter((file) => normalise(path.basename(file, ".md")) === target);
+
+		if (matches.length > 1) {
+			ctx.ui.notify(
+				`Auto-link skipped: multiple notes match “${slug}”. Use /md-log with the intended path.`,
+				"warning",
+			);
+			return;
 		}
-		if (!found) {
-			try {
-				const target = normalise(slug);
-				for (const entry of fs.readdirSync(AUTO_LINK_DIR!)) {
-					if (!entry.toLowerCase().endsWith(".md")) continue;
-					if (normalise(entry.slice(0, -3)) === target) {
-						found = path.join(AUTO_LINK_DIR!, entry);
-						break;
-					}
-				}
-			} catch {
-				/* directory missing — nothing to match against */
-			}
-		}
+		const found = matches[0];
 		if (!found) return;
 
 		logFile = found;

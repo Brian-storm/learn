@@ -5,67 +5,68 @@
 ### Vault (Obsidian)
 - **Path**: `/home/bb891/vault` → `/mnt/c/Users/bb891/Obsidian/Vault/Study/AI-Learning`
 - **Structure**:
-  - `Ongoing/` — active courses with lecture materials (`.pptx`, `.pdf`)
-  - `Courses/` — course index (currently empty)
-  - `lessons/` — converted/studied lessons
-  - `viz/` — rendered diagrams and visuals
+  - `Courses/<course>/` — per-course indexes, sources, exercises, and study notes
+  - `Notes/` — general or cross-course notes
+  - `viz/` — rendered diagrams embedded in notes
+  - `WORKFLOW.md` — Pi/Obsidian operating guide
 
 ### Pi Working Directory
 - **Path**: `/home/bb891/ai-learning/`
 - **Purpose**: coding agent sessions, agent definitions, skills
 - **Subdirs**:
-  - `.pi/agents/` — project-local subagent definitions (content-getter, content-parser, mermaid-maker, researcher, svg-maker)
-  - `.pi/skills/` — project-local skills (teach, visualize, md-to-pdf)
-  - `courses/` — course stubs (empty; actual content lives in vault)
+  - `.pi/agents/` — project-local subagent definitions
+  - `.pi/skills/` — project-local skills
+  - `courses/` — harness-side course stubs, if any (course content lives in vault)
 
-## Active Courses
+## Courses in the Vault
 
-| Course | Lectures | Labs | Location |
-|--------|----------|------|----------|
-| CSCI3150 | 4 PPTX (Lec01–Lec04) | lab01, lab2 | `vault/Ongoing/CSCI3150/` |
-| MATH3215 | 3 PDF (L1–L3) | — | `vault/Ongoing/MATH3215/` |
-| AIST1000 | 3 lecture dirs + 3 tutorial dirs | — | `vault/Ongoing/AIST1000/` |
-| AIST3030 | 5 PDF partials | — | `vault/Ongoing/AIST3030/` |
+| Course | Current content | Vault location |
+|--------|-----------------|----------------|
+| AIST1000 | Lectures, tutorials, quiz prep, lecture notes | `vault/Courses/AIST1000/` |
+| AIST3030 | Lecture sources and lecture notes | `vault/Courses/AIST3030/` |
+| CSCI3150 | Four lecture decks, labs, and study notes | `vault/Courses/CSCI3150/` |
+| CSCI3160 | Lecture/tutorial sources, exercises, and working notes | `vault/Courses/CSCI3160/` |
+| MATH3215 | Three lecture PDFs | `vault/Courses/MATH3215/` |
 
 ## Available Content Conversion Tools
-- `markitdown` at `~/.local/bin/markitdown` ✓ (PPTX → MD, preferred)
-- `python-pptx` (installed via pip) ✓ (fallback for PPTX text extraction)
+- `markitdown` at `~/.local/bin/markitdown` ✓ (PPTX → Markdown, preferred)
+- `python-pptx` ✓ (fallback for PPTX text extraction)
 - `pdftotext` ✗ (not installed)
 - `pandoc` ✗ (not installed)
 
 ## Project Skills (Pi)
 - `teach` — teach through first principles and adaptive retrieval practice.
 - `visualize` — create and embed a focused diagram when it materially clarifies a lesson.
-- `md-to-pdf` — export one or more Markdown notes as searchable PDFs, preserving headings, lists, code blocks, pipe tables, and Obsidian callouts. Invoke with `/skill:md-to-pdf`; its launcher is `.pi/skills/md-to-pdf/scripts/md-to-pdf` and writes PDFs beside the source notes by default.
+- `md-to-pdf` — export Markdown notes as searchable PDFs; invoke with `/skill:md-to-pdf`.
 
 ## Agent Inventory (Project-Local)
-Spawn these when needed:
-- `content-getter` — maps workspace, discovers courses/files/tools
-- `content-parser` — converts `.pptx`/`.pdf` to `.md` using best available tool
-- `mermaid-maker` — creates dependency graphs, flowcharts, system diagrams
-- `svg-maker` — creates spatial/geometric visuals (number lines, vectors, plots)
-- `researcher` — web search for facts, definitions, verification
+- `content-getter` — maps workspace, courses, files, and tools
+- `content-parser` — converts `.pptx`/`.pdf` to `.md` using available tools
+- `mermaid-maker` — creates dependency graphs, flowcharts, and system diagrams
+- `svg-maker` — creates spatial/geometric visuals
+- `researcher` — web search for facts, definitions, and verification
 
 ## User Preferences & Context
-- **Goal**: deeply understand CSCI3150 (Operating Systems) from principles up, not memorize
-- **Learning style**: Socratic for reason-able concepts; expository delivery when energy is low
-- **Weak areas**: Unix system calls (fork/exec/pipe), process memory layout
-- **Comfortable with**: C syntax, basic pointers, command line
-- **Prefers**: diagrams for spatial concepts, quiz-based edge-finding before teaching
-- **Vault access**: user manages Obsidian vault on Windows side; symlinked into WSL
+- **Goal**: deeply understand CSCI3150 (Operating Systems) from principles up, not memorize.
+- **Learning style**: Socratic for reason-able concepts; expository delivery when energy is low.
+- **Weak areas**: Unix system calls (`fork`/`exec`/`pipe`), process memory layout.
+- **Comfortable with**: C syntax, basic pointers, command line.
+- **Prefers**: diagrams for spatial concepts and quiz-based edge-finding before teaching.
+- **Vault access**: user manages Obsidian on Windows; the vault is symlinked into WSL.
 
 ## Course-Specific Notes
 
 ### CSCI3150 — OS Principles
-- Textbook reference: OSTEP (Operating Systems: Three Easy Pieces)
-- Lecture coverage so far:
-  - Lec01: Course overview, Von Neumann, OS functions (virtualization, system calls), concurrency race example
-  - Lec02: Process system calls — fork, wait, exec, exit; zombie/orphan processes; background processes
-  - Lec03: Memory API — malloc, free, calloc, realloc; common errors (leak, dangling, double-free)
-  - Lec04: File & directory — open/read/write/lseek, dup/pipe, fsync, rename, stat, hard/soft links
-- Known gaps from probing: fork return values, exec never-returns behavior, free/dangling pointer semantics, hard vs symbolic links
+- Textbook reference: OSTEP (Operating Systems: Three Easy Pieces).
+- Lecture coverage: Lec01 overview/virtualization/concurrency; Lec02 process system calls; Lec03 memory API; Lec04 file/directory calls and links.
+- Known gaps from probing: `fork` return values, `exec` never-return behavior, `free`/dangling-pointer semantics, hard vs symbolic links.
+- Course materials and notes: `vault/Courses/CSCI3150/`.
 
-## Quick Reference
-- Convert a lecture: `markitdown Lec0X.pptx -o Lec0X.md`
-- Convert Markdown notes to PDF: `.pi/skills/md-to-pdf/scripts/md-to-pdf path/to/note.md [another-note.md ...]`
-- Standard vault course path: `vault/Ongoing/<course>/`
+## Vault Conventions
+- Course materials belong under `vault/Courses/<course>/`.
+- Original source files go under `Sources/`; exercises/labs under `Exercises/`; synthesized study material under `Notes/`.
+- General or cross-course notes go under `vault/Notes/`.
+- Course indexes are `Courses/<course>/Course.md`; the vault landing page is `Home.md`.
+- Diagrams are published to `vault/viz/` through the `ai-learning/viz` symlink.
+- Convert a lecture: `markitdown input.pptx -o output.md`.
+- Convert notes to PDF: `.pi/skills/md-to-pdf/scripts/md-to-pdf path/to/note.md [another-note.md ...]`.

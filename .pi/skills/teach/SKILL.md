@@ -140,7 +140,7 @@ If you catch yourself asserting a fact he'd have to take on faith — foundation
 
 After the teaching session concludes, write a comprehensive lesson note summarizing everything taught. This is mandatory — not optional.
 
-**Location:** Save to `vault/lessons/`. Create the directory if it does not exist. Use a descriptive filename that captures the topic; do not enforce rigid `<course>-<topic>` formatting unless the user prefers it.
+**Location:** If the topic belongs to a course, save to `vault/Courses/<course>/Notes/Lectures/`. For cross-course or general topics, save to `vault/Notes/`. Use a descriptive filename that captures the topic; do not enforce rigid `<course>-<topic>` formatting unless the user prefers it. Create the destination folder if needed.
 
 **Content must include:**
 1. **Session metadata:** date, course/topic, goal statement.

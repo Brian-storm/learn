@@ -32,12 +32,12 @@ find ~ -maxdepth 2 -name "*vault*" -o -name "*obsidian*" 2>/dev/null
 
 # Course directories
 ls -la ~/ai-learning/courses/ 2>/dev/null
-ls -la ~/vault/Ongoing/ 2>/dev/null
 ls -la ~/vault/Courses/ 2>/dev/null
+find ~/vault/Courses -maxdepth 3 -type d 2>/dev/null | sort
 ```
 
 ### Step 2: Course Inventory
-For each subdirectory under the vault/Ongoing or courses/:
+For each subdirectory under vault/Courses/ (the canonical course home):
 
 ```bash
 find <course-dir> -maxdepth 1 -type d
@@ -70,22 +70,22 @@ Return a compact markdown report with this structure:
 
 ### Vault
 - Path: `/home/bb891/vault` → `/mnt/c/.../AI-Learning`
-- Subdirs: `Ongoing/`, `Courses/`, `lessons/`, `viz/`
+- Subdirs: `Courses/`, `Notes/`, `viz/`
 
-### Active Courses
-| Course | Lecture Files | Lab Files | Converter Ready? |
-|--------|--------------|-----------|-----------------|
-| CSCI3150 | 4 .pptx (Lec01–Lec04) | lab01/, lab2/ | markitdown ✓ |
+### Courses
+| Course | Source material | Notes/exercises |
+|--------|----------------|-----------------|
+| CSCI3150 | `Sources/Lectures/` | `Notes/`, `Exercises/Labs/` |
 
 ### Tools Available
 - `markitdown` at `~/.local/bin/markitdown`
-- `pdftotext`: not found
-- `pandoc`: not found
-- `python-pptx`: not found
+- `pdftotext`: check current availability
+- `pandoc`: check current availability
+- `python-pptx`: check current availability
 
 ### Notes
-- Course content is in vault/Ongoing/CSCI3150/
-- Empty course stub exists at `~/ai-learning/courses/CSCI3150/`
+- Course content is in vault/Courses/CSCI3150/ (Sources/, Exercises/, Notes/)
+- Course index: `vault/Courses/CSCI3150/Course.md`
 ```
 
 ---
