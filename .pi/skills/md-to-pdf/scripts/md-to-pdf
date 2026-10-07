@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+SKILL_DIR="$(cd -- "$SCRIPT_DIR/.." && pwd)"
+BASE_PYTHON="${MD_TO_PDF_PYTHON:-python3}"
+
+if ! command -v "$BASE_PYTHON" >/dev/null 2>&1; then
+  printf 'md-to-pdf: Python 3 was not found (set MD_TO_PDF_PYTHON to its path).\n' >&2
+  exit 127
+fi
+
+if "$BASE_PYTHON" -c 'import reportlab' >/dev/null 2>&1; then
+  exec "$BASE_PYTHON" "$SCRIPT_DIR/md_to_pdf.py" "$@"
+fi
+
+CACHE_ROOT="${XDG_CACHE_HOME:-$HOME/.cache}/pi-md-to-pdf"
+VENV="$CACHE_ROOT/venv"
+if [[ ! -x "$VENV/bin/python" ]]; then
+  mkdir -p "$CACHE_ROOT"
+  if ! "$BASE_PYTHON" -m venv "$VENV"; then
+    printf 'md-to-pdf: could not create a Python virtual environment. Install Python venv support and retry.\n' >&2
+    exit 1
+  fi
+fi
+
+if ! "$VENV/bin/python" -c 'import reportlab' >/dev/null 2>&1; then
+  printf 'md-to-pdf: installing the PDF renderer once into %s\n' "$VENV" >&2
+  "$VENV/bin/python" -m pip install --disable-pip-version-check -r "$SKILL_DIR/requirements.txt"
+fi
+
+exec "$VENV/bin/python" "$SCRIPT_DIR/md_to_pdf.py" "$@"

@@ -15,7 +15,7 @@
 - **Purpose**: coding agent sessions, agent definitions, skills
 - **Subdirs**:
   - `.pi/agents/` — project-local subagent definitions (content-getter, content-parser, mermaid-maker, researcher, svg-maker)
-  - `.pi/skills/` — project-local skills (teach, visualize)
+  - `.pi/skills/` — project-local skills (teach, visualize, md-to-pdf)
   - `courses/` — course stubs (empty; actual content lives in vault)
 
 ## Active Courses
@@ -32,6 +32,11 @@
 - `python-pptx` (installed via pip) ✓ (fallback for PPTX text extraction)
 - `pdftotext` ✗ (not installed)
 - `pandoc` ✗ (not installed)
+
+## Project Skills (Pi)
+- `teach` — teach through first principles and adaptive retrieval practice.
+- `visualize` — create and embed a focused diagram when it materially clarifies a lesson.
+- `md-to-pdf` — export one or more Markdown notes as searchable PDFs, preserving headings, lists, code blocks, pipe tables, and Obsidian callouts. Invoke with `/skill:md-to-pdf`; its launcher is `.pi/skills/md-to-pdf/scripts/md-to-pdf` and writes PDFs beside the source notes by default.
 
 ## Agent Inventory (Project-Local)
 Spawn these when needed:
@@ -62,4 +67,5 @@ Spawn these when needed:
 
 ## Quick Reference
 - Convert a lecture: `markitdown Lec0X.pptx -o Lec0X.md`
+- Convert Markdown notes to PDF: `.pi/skills/md-to-pdf/scripts/md-to-pdf path/to/note.md [another-note.md ...]`
 - Standard vault course path: `vault/Ongoing/<course>/`
