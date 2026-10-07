@@ -40,14 +40,18 @@ find ~/vault/Courses -maxdepth 3 -type d 2>/dev/null | sort
 For each subdirectory under vault/Courses/ (the canonical course home):
 
 ```bash
-find <course-dir> -maxdepth 1 -type d
-find <course-dir> -type f | head -40
+find <course-dir> -maxdepth 4 -type d | sort
+find <course-dir> -maxdepth 5 -type f | sort | head -100
 ```
 
-Note:
-- Lecture files (`.pptx`, `.pdf`, `.md`)
-- Lab/tutorial directories
-- Syllabus or README files
+Classify files by role in the canonical layout:
+- Original lecture/tutorial files: `Sources/Lectures/`, `Sources/Tutorials/`
+- Converted/extracted Markdown: `Sources/Converted/Lectures/`, `Sources/Converted/Tutorials/`
+- Exercise PDFs and conversions: `Exercises/Regular/`, `Exercises/Regular/Converted Markdown/`, `Exercises/Special/`
+- Synthesized study notes: `Notes/`
+- Course navigation: `Course.md`
+
+Do not treat converted Markdown as original source files, and do not expect a separate `Sources/Extracted/` folder.
 
 ### Step 3: Symlink Resolution
 Follow symlinks so the report shows real paths.

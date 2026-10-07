@@ -138,7 +138,7 @@ If you catch yourself asserting a fact he'd have to take on faith — foundation
 
 ## Phase 4 — Save the lesson note (never skip this)
 
-After the teaching session concludes, write a comprehensive lesson note summarizing everything taught. This is mandatory — not optional.
+After the teaching session concludes, write a comprehensive lesson note summarizing everything taught. This is mandatory — not optional. Before drafting, read `/home/bb891/ai-learning/.pi/skills/lesson-note/SKILL.md` and follow its readability guidance: preserve the required substance, but organize it as a skimmable note rather than a dense transcript. Use short chunks, avoid repetition, and make secondary details visibly optional.
 
 **Location:** If the topic belongs to a course, save to `vault/Courses/<course>/Notes/Lectures/`. For cross-course or general topics, save to `vault/Notes/`. Use a descriptive filename that captures the topic; do not enforce rigid `<course>-<topic>` formatting unless the user prefers it. Create the destination folder if needed.
 
@@ -152,9 +152,12 @@ After the teaching session concludes, write a comprehensive lesson note summariz
 
 **This note is the durable artifact.** The live session builds the graph in his head; the lesson note preserves it in the vault for review, spaced repetition, and linking to other notes. Always save it before ending the session.
 
-Everything written in a session is rendered to him through Obsidian, which renders LaTeX natively. So whenever math notation is involved — explanations, questions, quiz options and explanations, anything — write it in LaTeX instead of plain-text approximations:
+## Math formatting depends on where the text appears
 
-- Inline math: `$f(x)$`
-- Centered display math: `$$` fenced on its own lines, e.g. `$$\n f(x) \n$$`
+Pi's terminal does not render LaTeX. Choose notation for the output surface:
 
-If LaTeX can be used, it should be. Write $f(x) = x^2$, not `f(x) = x^2`.
+- **Interactive terminal teaching** — quiz questions/options, prompts, and explanations the learner reads in the TUI: do not wrap math in LaTeX delimiters. Prefer Unicode math for simple expressions, e.g. `ŷ = θ₀ + θ₁x₁ + θ₂x₂`. Use ASCII notation (e.g. `y_hat = theta_0 + theta_1*x_1 + theta_2*x_2`) if a glyph/subscript is unsupported or the expression becomes hard to scan. For complex notation, explain the idea in words and use a plain-text/code-block expression only when needed.
+- **Durable Obsidian Markdown notes** — use LaTeX, which Obsidian renders natively: inline `$f(x)$`; display equations as `$$ ... $$` on separate lines.
+- **Mixed responses** — keep terminal-facing teaching and quiz content plain-text math; put rendered LaTeX in the saved Markdown note. Never assume that because a response is mirrored to Obsidian, the terminal itself will render it.
+
+Prioritize legibility over symbolic compactness in both places.

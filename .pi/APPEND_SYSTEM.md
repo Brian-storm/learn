@@ -64,7 +64,9 @@
 
 ## Vault Conventions
 - Course materials belong under `vault/Courses/<course>/`.
-- Original source files go under `Sources/`; exercises/labs under `Exercises/`; synthesized study material under `Notes/`.
+- Original lecture/tutorial files go under `Sources/Lectures/` or `Sources/Tutorials/`; Markdown conversions/extractions go under `Sources/Converted/Lectures/` or `Sources/Converted/Tutorials/`. Do not create a separate `Sources/Extracted/` folder.
+- Exercise PDFs go under `Exercises/Regular/` or `Exercises/Special/`; regular-exercise conversions go under `Exercises/Regular/Converted Markdown/`.
+- Synthesized study material goes under `Notes/`, not `Sources/Converted/`.
 - General or cross-course notes go under `vault/Notes/`.
 - Course indexes are `Courses/<course>/Course.md`; the vault landing page is `Home.md`.
 - Diagrams are published to `vault/viz/` through the `ai-learning/viz` symlink.

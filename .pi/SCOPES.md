@@ -24,7 +24,8 @@ Everything you **read and review** in Obsidian: notes, course indexes, lecture s
 | Category | Path |
 |---|---|
 | Course indexes | `Courses/<course>/Course.md` |
-| Source materials | `Courses/<course>/Sources/` (`.pptx`, `.pdf`, converted text) |
+| Original lecture/tutorial sources | `Courses/<course>/Sources/Lectures/`, `Sources/Tutorials/` |
+| Converted/extracted Markdown | `Courses/<course>/Sources/Converted/<Lectures or Tutorials>/` |
 | Course notes and exercises | `Courses/<course>/Notes/`, `Courses/<course>/Exercises/` |
 | General notes | `Notes/<topic>.md` |
 | Rendered diagrams | `viz/*.png` |
@@ -40,7 +41,8 @@ Everything you **read and review** in Obsidian: notes, course indexes, lecture s
 | Adding an extension or tool | `ai-learning/.pi/extensions/…` |
 | Creating a course lesson note to read later | `vault/Courses/<course>/Notes/Lectures/` |
 | Creating a general note | `vault/Notes/` |
-| Dropping in lecture slides | `vault/Courses/<course>/Sources/Lectures/` |
+| Dropping in original lecture slides | `vault/Courses/<course>/Sources/Lectures/` |
+| Saving converted lecture text | `vault/Courses/<course>/Sources/Converted/Lectures/` |
 | Writing a course overview | `vault/Courses/` |
 | Publishing a diagram from a subagent | `ai-learning/viz/` (lands in `vault/viz/`) |
 
