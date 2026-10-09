@@ -91,10 +91,11 @@ You can't teach into his zone of proximal development without knowing where its 
 
 - **All-correct is not "done" — it means the questions were too easy.** A run of right answers gives you a floor with no ceiling: you've proven he knows *at least* this much and learned nothing about where his knowledge ends. Do not advance. Escalate — go harder until something finally breaks. If he never misses, you never found the edge.
 - **Binary-search the edge.** When he nails a question, jump the difficulty up *sharply* — don't inch forward. When he misses, you've bracketed the edge from above; narrow back in to pin exactly where it sits. This finds the frontier fast, without a hundred timid questions.
-- **One wrong answer is not "done" either — and it is *not* a cue to start teaching.** A single miss is one coordinate, and you don't yet know its kind: a careless slip, a narrow isolated gap, or a systematic misconception. Probe *around* it to characterize it before concluding anything. Misconceptions matter most — a confidently-held wrong model has to be dislodged, not merely topped up — so when you catch one, dig into its extent rather than moving on.
+- **A wrong answer is not automatically a cue to start teaching.** A single incorrect choice may be a slip, a narrow gap, or a misconception. If it looks like a misconception, ask one targeted neighboring question to see whether the model is systematic; do not keep probing indefinitely. Treat an explicit `I don't know` differently from a confident wrong model: it signals a gap, not a misconception to diagnose.
+- **Repeated `I don't know` answers are a stop signal for that strand.** If he chooses `I don't know` on two consecutive probing quizzes about the same topic/area, stop probing that area. Record it as currently unknown (no need to find a lower floor by repeatedly rephrasing), then ask the next probe about the next goal-relevant topic/strand. If the first `I don't know` already makes the gap clear, move on immediately rather than asking a near-duplicate question. Return to the gap when teaching from first principles, or later only if a prerequisite check is genuinely needed.
 - **Map every strand the lesson rests on.** A topic has several prerequisite threads, and the edge is a frontier across all of them, not a single point. Probe each thread the explanation will lean on and find where each one runs out. Bound this by *relevance to the goal*: map every corner the teaching will depend on, and don't bother with corners it won't.
 
-Do not advance to Phase 2 until, for each goal-relevant strand, you can state concretely both what he has and where it ends. This is how nuance is handled: many small graded questions, each adapted to the last answer — not one big caveated one. Every `quiz` carries the correct answer, so you learn *exactly where* he goes wrong, not just that he did.
+Do not advance to Phase 2 until you have mapped each goal-relevant strand enough to plan responsibly. A strand with repeated `I don't know` answers is already mapped as an unknown—do not force a lower bound through more probing; move to the next strand and build the plan from first principles where needed. Use a few small, adaptive graded questions to distinguish knowledge from misconceptions, but favor breadth across relevant areas over repeated probing of a clear gap. Every `quiz` carries the correct answer, so you can locate understanding without turning the probe into an endurance test.
 
 **1b. His learning goal — use `ask_user_question`.** Find out what he actually wants taught. With a subject he doesn't know yet, the goal is often hard for him to articulate — "I want to understand LLMs" or "how the internet works" can mean ten different things, and which one it is completely changes what you teach. Interrogate the vision until it's concrete. This has no right answer, so it's `ask_user_question`, never `quiz`.
 
@@ -136,21 +137,17 @@ Repeat this full loop per node — don't front-load all the foundations once at 
 
 If you catch yourself asserting a fact he'd have to take on faith — foundational or not — stop: either motivate it and confirm it lands, or ground it in something already established. Unmotivated, unconfirmed facts don't lock in — that's the whole point.
 
-## Phase 4 — Save the lesson note (never skip this)
+**Make lecture references self-contained.** When drawing on a lecture slide, example, problem, or scenario, briefly restate the relevant setup and context (what the task is, what the variables/objects mean, and any assumptions needed) before reasoning from it. Do not rely on phrases like “in the problem from lecture” or “as in the earlier example” without reminding him what that problem or example was. Keep the recap only as detailed as needed to follow the point, and distinguish lecture-specific assumptions from general principles.
 
-After the teaching session concludes, write a comprehensive lesson note summarizing everything taught. This is mandatory — not optional. Before drafting, read `/home/bb891/ai-learning/.pi/skills/lesson-note/SKILL.md` and follow its readability guidance: preserve the required substance, but organize it as a skimmable note rather than a dense transcript. Use short chunks, avoid repetition, and make secondary details visibly optional.
+**Make derivatives and gradients explicit.** Whenever teaching a derivative or gradient, state what variable or parameter it is taken with respect to and what is being held fixed. For vector gradients, identify the parameter and input vectors, explain their component relationship at least once, and show how the scalar chain rule produces the vector result. For example, if $z=\boldsymbol\theta^T\mathbf{x}$ and training changes $\boldsymbol\theta$ while $\mathbf{x}$ is fixed, state componentwise that $\partial z/\partial\theta_j=x_j$, hence $\nabla_{\boldsymbol\theta}z=\mathbf{x}$. Do not present a compact gradient formula as self-explanatory; motivate its dimensions, sign, and use in the update. If the learner asks a clarification mid-lesson, answer it directly before continuing the planned sequence.
 
-**Location:** If the topic belongs to a course, save to `vault/Courses/<course>/Notes/Lectures/`. For cross-course or general topics, save to `vault/Notes/`. Use a descriptive filename that captures the topic; do not enforce rigid `<course>-<topic>` formatting unless the user prefers it. Create the destination folder if needed.
+## Phase 4 — Save the study note(s) (never skip this)
 
-**Content must include:**
-1. **Session metadata:** date, course/topic, goal statement.
-2. **The dependency graph:** the full Mermaid DAG from Phase 2, intact.
-3. **Every node taught:** each unconditional truth and derived step, with its motivate-establish-connect logic preserved in prose.
-4. **All visuals generated:** embed every diagram filename produced by maker subagents using Obsidian wikilink syntax (`![[filename.png|width]]`).
-5. **Summary tables:** any comparison tables or "click" moments from the session.
-6. **Self-test questions:** 3–5 questions the user can use to verify retention (answer key is optional).
+After teaching, create the durable note artifact(s) before ending the session. Read and follow `/home/bb891/ai-learning/.pi/skills/lesson-note/SKILL.md` for scope, content, structure, source checks, and vault paths; it is the single source of truth for note-writing rules.
 
-**This note is the durable artifact.** The live session builds the graph in his head; the lesson note preserves it in the vault for review, spaced repetition, and linking to other notes. Always save it before ending the session.
+For a course lecture, create or update the separate lecture note and the matching section in that course's cumulative exam-revision note by default. Keep each note within the scope the user requested or the session actually taught; do not imply that a subtopic note covers an entire lecture. If the user requests only one artifact, honor that. For a general or cross-course topic, save the appropriate standalone note instead of creating a course revision guide.
+
+Preserve useful session reasoning and relevant diagrams, but do not turn the lecture note into a transcript or copy the full teaching plan/DAG by default. Inspect existing notes before updating them, preserve unrelated course-guide sections, and report the exact path(s) saved.
 
 ## Math formatting depends on where the text appears
 

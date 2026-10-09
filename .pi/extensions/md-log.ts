@@ -31,13 +31,12 @@ import * as path from "node:path";
 
 const QA_TOOLS = new Set(["quiz", "ask_user_question"]);
 
-/**
- * Where auto-linking looks for a session-named note.
- *
- * `~/.pi/agent/extensions/` config is not used here; this is a project-level
- * convenience. The default root is the vault symlink; override with PI_MD_LOG_DIR
- * if the vault moves. Matching searches root Notes/ and Courses/*/Notes/.
- */
+
+//  Where auto-linking looks for a session-named note.
+// 
+//  `~/.pi/agent/extensions/` config is not used here; this is a project-level
+//  convenience. The default root is the vault symlink; override with PI_MD_LOG_DIR
+//  if the vault moves. Matching searches root Notes/ and Courses/*/Notes/.
 const AUTO_LINK_ROOT =
 	process.env.PI_MD_LOG_DIR || path.join(process.env.HOME || "", "vault");
 
