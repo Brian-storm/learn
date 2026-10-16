@@ -1,121 +1,235 @@
 ---
 name: lesson-note
-description: Generate source-grounded lecture notes and cumulative course exam-revision notes using a clear coverage-to-draft workflow and the learner's concise, explanation-first defaults.
+description: Create source-grounded, concise step-by-step lesson guides and clear reference notes in Obsidian, using a consistent template and fragment-only wording.
 ---
 
 # Lesson-note authoring
 
-The goal is a note that is concise without leaving the learner with unexplained labels. For course lectures, keep two artifacts distinct:
+Create **concise, practical lesson guides**, not teaching notes, lecture transcripts, or extended explanations. Preserve the original source coverage and useful structure while making the result easy to scan and follow.
 
-1. **Lecture note:** explains the lecture's key ideas.
-2. **Course exam-revision note:** accumulates compact, exam-oriented reference sections for each lecture.
+## Non-negotiable output style
 
-Use the workflow below. Adapt the presentation to the subject, but do not skip the scope, coverage, or final accuracy checks.
+- **Headings, bullet lists, numbered lists, checklists, tables, equations, and callouts only**
+- **No prose paragraphs**
+- **No complete sentences** anywhere in lesson or revision notes
+- Short noun phrases, labels, fragments, and compact action phrases only
+- Numbered steps as short action fragments, one action per step
+- No sentence-ending periods
+- No conversational transitions, filler, repeated summaries, or introductory prose
+- Compact but sufficient detail for correct use; clarity over extreme compression
 
-## 1. Interpret the request and set scope
+## 1. Interpret the request and define scope
 
-- Identify the requested artifact: new lecture note, lecture-note revision, course revision guide, feedback only, or another note type. Do not edit for advice-only requests.
-- Identify course, lecture/topic, source range, and requested depth. Apply any requested inclusions, exclusions, length, practice format, or output restrictions. Ordinary wording is sufficient; no special syntax is required. Explicit user instructions override defaults.
-- Default depth is **concise but self-contained**: explain the important ideas briefly, without turning the note into a transcript or a bare glossary. If asked for balanced or comprehensive depth, expand the reasoning and examples; keep optional material visibly separate.
-- If a material choice is unclear (for example, which course/source, what scope, or whether an existing note should be replaced), ask one focused clarifying question. Otherwise draft directly; do not ask for approval of a format or outline.
-- For a course lecture note, update both the lecture note and the course's cumulative exam-revision note by default. If the user asks for only one, update only that artifact. For general or cross-course topics, do not create a course revision guide unless requested.
+- Identify task: create, revise, or review a lesson guide, revision guide, or selected section
+- Identify course, topic, source set, intended scope, output paths, requested inclusions, exclusions, and depth
+- Treat explicit user requirements as higher priority than defaults
+- Default: concise, self-contained guide; procedural content in ordered steps; concepts in labeled reference bullets
+- No extended motivation, proofs, derivations, broad background, conversational teaching narrative, or unrequested practice questions
+- If a material choice remains unclear—source, scope, replacement of existing content—ask one focused question
+- Otherwise draft directly; no format or outline approval request
 
-Understand plain-language controls such as:
+## 2. Inspect sources and map coverage
 
-- “Make the standard note for Lecture 4 and update the course revision guide.”
-- “Cover only topics X and Y; keep it concise, include one worked example, and skip practice questions.”
-- “Update only the exam-revision section for Lecture 4; leave the lecture note unchanged.”
+Before writing or updating vault content, read and follow `/home/bb891/vault/WORKFLOW.md`.
 
-These are examples, not required syntax. Honor the requested output rather than filling the default template mechanically.
+- Inspect relevant primary sources before drafting
+- Prefer available Markdown conversions; verify against original slides/PDFs when conversion is incomplete, ambiguous, or insufficient
+- Consult course objectives, tutorials, exercises, and assessments when useful for procedure coverage or exam relevance
+- Inspect existing course notes and revision guide before substantial edits; match local conventions where practical
+- Build a brief **internal coverage inventory**; do not add a large planning checklist to the note
+  - Stated learning objectives within scope
+  - Core definitions, distinctions, rules, mechanisms, formulas, procedures, and conditions
+  - Methods emphasized, reused, or needed for course problems
+  - Common confusions or failure conditions supported by course material
+  - Logistics and incidental examples excluded unless reusable
+- Classify content internally as **core**, **supporting**, or **optional**
+  - Explain all core content compactly
+  - Fold useful supporting details into relevant bullets or steps
+  - Include optional depth only when requested or necessary to prevent misunderstanding
+- Respect narrow scope; do not imply a subtopic guide covers an entire lecture
+- For exam relevance, use objectives, source emphasis, exercises, and assessment information
+- Never invent an exam blueprint, expected question, or prediction
 
-## 2. Inspect sources and make a coverage inventory
-
-Before drafting, inspect the relevant source material. Prefer available Markdown conversions; check the original slides/PDF or related sources when the conversion is incomplete, ambiguous, or insufficient to verify a claim. Consult course objectives, tutorials, exercises, and assessment information when useful.
-
-Create a brief **internal coverage inventory**—it guides drafting but need not appear as a large checklist in the note:
-
-- Include every stated learning objective within the requested scope.
-- Identify substantive lecture content: defined terms, important distinctions, mechanisms, claims, formulas, procedures, worked methods, and concepts that are emphasized, reused, or needed to understand course problems.
-- Exclude logistics and incidental examples unless they teach a reusable idea or method.
-- Classify content as **core**, **supporting**, or **further exploration**. Every core item must be explained in the main note. Supporting items may be folded into those explanations. Put relevant deeper proofs, context, applications, or related theorems in an optional appendix.
-- Respect a narrower user-requested scope. Do not silently imply that a subtopic note covers an entire lecture.
-
-For exam-oriented material, use source emphasis, objectives, assessment information, and exercises as evidence. Never invent an exam blueprint or promise that a topic will appear. Label editorial prioritization as inferred when that distinction matters.
-
-## 3. Draft the individual lecture note
+## 3. Lecture guide
 
 **Location:** `Courses/<course>/Notes/Lectures/<topic>.md`
 
-Use a predictable set of anchors, but omit any section that would be empty or unhelpful:
+### Default template
 
-1. **Orientation / key concepts:** briefly state the topic and give a compact map or checklist of the central ideas. It must cover the core inventory without repeating the full explanations below.
-2. **Main explanation:** group related concepts and order them so each idea has the context or prerequisites it needs. Do not mechanically follow slide order when another order teaches better.
-3. **Quick check / common errors:** usually include 3–5 short self-test or practice questions, with checked answers or hints after the questions (a collapsible answer key is fine). Include likely errors with corrections when they are relevant; ground them in course material or label them as likely pitfalls.
-4. **Further exploration:** when there is relevant deeper material, put substantial proofs, derivations, context, applications, and related theorems here so they do not interrupt the core explanation.
-5. **Sources:** at the end, link the lecture and the other sources actually used. Distinguish primary course material from supplementary references. Also link the principal source near the top when an Obsidian wikilink exists.
+Use this template as a scaffold, not a mandatory set of empty sections. Omit irrelevant sections; add a section only when useful.
 
-For **each core concept**, use this as an internal explanatory checklist—not repeated subheadings:
+```markdown
+# <Topic>
 
-- **Meaning:** What does the term, claim, mechanism, or method mean? State genuine definitions precisely.
-- **Motivation:** What problem does it solve, what observation motivates it, or how does the reasoning lead to it? Avoid presenting derived claims as arbitrary facts.
-- **Use:** How can the learner recognize when it applies, use it, or infer its consequences? State important conditions, assumptions, and limits.
+> [!abstract] Scope
+> - <topic boundary>
+> - <central ideas or guide contents>
 
-Explain these dimensions naturally. Not every concept needs equal space: keep simple concepts short, and give difficult or easily confused concepts the explanation they need. Add a small worked example, comparison, or diagram when it resolves a real point of confusion; do not add one merely to satisfy a quota.
+## 1. <First concept or task>
 
-For formulas and procedures:
+- **Meaning / rule:** <compact reference fragment>
+- **Use when:** <recognition cue>
+- **Condition:** <essential assumption or requirement>
+- **Steps:**
+    1. <action fragment>
+    2. <action fragment>
+    3. <action fragment>
+- **Check / result:** <verification cue; outcome>
+- **Pitfall:** <common error, when supported>
 
-- Give formulas with symbol meanings, applicability conditions, and interpretation. Explain what terms count when that is a common source of error.
-- For a procedure, show the goal/inputs, recognition cues, ordered steps, and expected result or check.
-- Use display LaTeX for important equations. Use tables only for concise comparisons across a few aligned dimensions.
+## 2. <Next concept or task>
 
-### Obsidian readability and visual style
+- <clear labeled notes>
 
-- **Match the course's local style:** before drafting or substantially revising a lecture note, inspect one or two existing lecture notes in the same course and the cumulative revision guide. Follow their established callout, heading, and list conventions by default, unless the user asks for a different style. Prefer native Obsidian callouts over HTML `<details>` when the course notes use callouts for collapsed answer keys.
-- Prefer Obsidian’s built-in callouts as restrained, semantic color accents: `[!abstract]` for scope, `[!tip]` for takeaways or recognition cues, `[!info]` for clarifications, `[!example]` for worked examples, `[!warning]` for pitfalls, and a collapsed `[!success]-` callout for answer checks.
-- Keep callouts concise, purposeful, and **non-nested**. Use separate callout blocks rather than putting one callout inside another; avoid making every paragraph a colored box.
-- Use heading levels to organize the page. In study notes, number every substantive section and subsection hierarchically: H2 headings as `1.`, `2.`, H3 headings as `1.1`, `1.2`, and meaningful H4 headings as `1.1.1` when needed. Keep numbering sequential within each note; renumber affected headings when adding or moving sections. Leave the H1 title, metadata, source headings, and answer-key callouts unnumbered; do not number ordinary paragraphs, bullets, or table rows. Bold **key terms, method names, prerequisites, assumptions, and conditions**—for example, **linearly independent columns**—so they stand out during review. Use italics sparingly for secondary emphasis; do not bold whole sentences indiscriminately.
-- Use bullets more liberally to make explanations scannable and easy to review—not only for bare lists. Turn compact explanations into labeled bullet points, with complete, memorable statements under lead-ins such as `**Definition:**`, `**Why it matters:**`, `**Condition:**`, `**Consequence:**`, `**Example:**`, and `**Pitfall:**`. Prefer this over a run of dense prose when ideas can be separated cleanly.
-- Use **nested bullets** to show relationships: put the main category or rule at the parent level, its statement or examples beneath it, and proof cues/conditions one level deeper when useful. Indent each nested level by **four spaces**—not just a small two-space offset—so the hierarchy is visually clear. For compact reference sections, numbered parent items work well for distinct categories or rules even when they are not procedural steps; use bullets for their details. Example:
-    1. **Affine precomposition**
-        - **Rule:** $f(Ax+b)$ preserves convexity and concavity.
-            - **Proof cue:** affine maps preserve convex combinations, so apply the defining inequality for $f$.
-    2. **Pointwise extrema**
-        - **Rule:** maxima preserve convexity; minima preserve concavity.
-            - **Proof cue:** bound each function by the endpoint maxima, then take the maximum.
-- When a bullet introduces a display equation, indent the `$$` block with that bullet so the equation visibly belongs to the statement. Keep explanations, formulas, and their conditions grouped together rather than separating them into disconnected paragraphs.
-- Keep top-level lists focused: make a new parent bullet for a distinct concept, and use child bullets for its details. Do not force every sentence into its own bullet; retain brief connecting prose or use numbered steps when order and reasoning sequence matter.
-- Do not add custom CSS or prescribe fonts unless the user asks; built-in callout colors are determined by the active Obsidian theme.
-- For Obsidian math, use `$...$` for inline expressions and `$$` on separate lines for display equations. Avoid `\(...\)` and `\[...\]` delimiters. In Markdown tables, avoid unescaped `|` inside math; use `\lvert ... \rvert` for absolute values or move the expression outside the table.
+## 3. <Optional practice or common errors>
 
-## 4. Update the cumulative course exam-revision note
+- <include only when requested or materially useful>
+
+## Sources
+
+- [[<primary course source>]]
+- [[<other source actually used>]]
+```
+
+### Procedure and method format
+
+For each substantive usable technique or procedure, include applicable fields from this compact pattern:
+
+- **Goal:** outcome phrase
+- **Recognition cue:** situation or question cue, when useful
+- **Condition:** checkable prerequisites and pass criteria
+  - `- [ ]` one checkable requirement per item
+  - Include applicability assumptions and success criteria
+- **Steps:** numbered actions in execution order
+  - One action per step
+  - Short rationale only when needed to prevent a likely mistake
+- **Result:** what completion or passing establishes; limits or next action when material
+
+Do not split assumptions and pass criteria into confusing prose. Keep conditions distinct from the result. Do not force unused fields.
+
+### Concept and reference-note format
+
+For non-procedural material, use concise labeled bullets as relevant:
+
+- **Meaning:** precise definition or claim fragment
+- **Rule:** essential relationship, formula, or behavior
+- **Use:** application or recognition cue
+- **Condition:** assumptions, scope, or limits
+- **Consequence:** immediate implication
+- **Example:** minimal example only when needed for unambiguous use
+- **Pitfall:** source-grounded common confusion
+
+No need to mechanically include every label for every concept. Avoid label-only fragments that leave the meaning unclear.
+
+### Equations, examples, and checks
+
+- Important formula: display LaTeX; define symbols; state conditions and interpretation compactly
+- Procedures: include formulas beside the relevant step or condition
+- Examples: include only when they clarify application, distinguish cases, or prevent a likely error
+- Worked examples: short, numbered actions; no extended explanatory narrative
+- Practice questions, quizzes, answers, or answer keys: only when requested
+- Common errors: include only when relevant and source-grounded
+- Tables: concise comparisons across a few aligned dimensions only
+
+## 4. Cumulative course exam-revision guide
 
 **Location:** `Courses/<course>/Notes/Exam Revision/<course>-Exam-Revision.md`
 
-Maintain one cumulative note per course, with compact lecture-by-lecture sections in course order. Use source numbering/order; label uncertain ordering rather than guessing. Inspect an existing guide first, preserve unrelated sections, and update only the relevant lecture section unless broader changes are requested.
+- Default for course lecture requests: update both lecture guide and cumulative revision guide
+- If the user requests one artifact only, update only that artifact
+- For general or cross-course topics, no course revision guide unless requested
+- Maintain one cumulative guide per course, organized by lecture/topic in course order
+- Inspect existing guide; preserve unrelated content; update only relevant section unless broader edits requested
+- Use source order or numbering; label uncertain ordering rather than guessing
+- Distill, do not duplicate lecture-guide explanations, proofs, or examples
+- Keep exam material actionable and compact:
+  - Recognition cues
+  - Essential definitions, distinctions, and formulas
+  - Procedure conditions and numbered steps
+  - Result interpretation and limitations
+  - Common pitfalls
+  - Practice items only when requested or already required by local conventions
+- Label inferred prioritization as inference when useful; do not claim expected exam appearance without explicit source support
 
-For each lecture section, include the applicable exam-oriented reference material:
+### Revision-section template
 
-- key formulas, definitions, and distinctions, with conditions and symbol meanings;
-- cues for recognizing question types and choosing a method;
-- concise solution procedures and useful answer patterns;
-- likely errors and how to avoid or correct them;
-- representative practice questions with checked answers, hints, or solution cues when supported by the material.
+```markdown
+## <Lecture / topic>
 
-Prefer actionable cues (“if the question gives/asks X, consider method Y”) over a formula dump. Do not force an empty category: if a lecture has no relevant formula or procedure, cover its applicable concepts instead. Keep sections compact and scannable, but do not force a literal one-page limit. Link each section to its lecture note and sources. Distill the lesson note rather than copying its explanations, proofs, or examples wholesale.
+1. **<Concept or method>**
+    - **Rule / meaning:** <reference fragment>
+    - **Recognition cue:** <when to use>
+    - **Condition:**
+        - [ ] <checkable prerequisite or pass criterion>
+    - **Steps:**
+        1. <action fragment>
+        2. <action fragment>
+    - **Result / pitfall:** <interpretation or error cue>
 
-## 5. Verify before saving
+- **Guide:** [[<lecture guide>]]
+- **Sources:** [[<source>]]
+```
 
-Use this checklist on both artifacts:
+Use only applicable fields. Number distinct concepts when that improves navigation; avoid numbering every isolated reminder.
 
-- **Coverage:** every core item in the inventory is explained in the lecture note; the revision section reflects the requested scope. No important item disappeared during condensation.
-- **Understanding:** core concepts have a clear meaning, motivating reason, and use/recognition cue as appropriate; the note connects ideas instead of listing isolated facts.
-- **Accuracy:** terminology matches the course; source ambiguities are verified or flagged; formulas, examples, calculations, and answer keys are checked.
-- **Separation:** the lecture note teaches; the course guide cues quick recall and exam methods; deeper exploration is optional and does not crowd out the core.
-- **Readability:** headings are informative, paragraphs and table cells are concise, summaries do not duplicate the body, and diagrams clarify rather than decorate. Use labeled bullets broadly for definitions, conditions, interpretations, examples, distinctions, and implications; nest related details beneath a clear parent bullet with consistent indentation. Indent display equations under the bullet that introduces them. Use numbered lists for ordered derivations, procedures, and worked solution steps. Keep connecting prose where it explains why steps follow. Check that the callout and list style matches the existing course notes.
-- **Vault quality:** paths follow `/home/bb891/vault/WORKFLOW.md`; links resolve; LaTeX is valid; useful existing content is preserved.
+## 5. Presentation and Obsidian conventions
 
-Do not fabricate errors, examples, citations, or exam predictions to fill a section. If the sources do not support a detail, verify it from a reliable related source when appropriate or state the uncertainty.
+### Structure and hierarchy
 
-## 6. Report the result
+- H1: unnumbered note title
+- Substantive H2 sections: hierarchical numbering, such as `1.`, `2.`
+- H3 subsections: `1.1`, `1.2`; meaningful H4: `1.1.1`
+- Renumber affected headings when sections move
+- Do not number metadata, source headings, callout titles, ordinary bullets, or table rows
+- Numbered lists for ordered procedures, derivations, and workflows
+- Bullets for unordered facts, conditions, comparisons, and supporting detail
+- Four-space indentation for nested lists; consistent nesting throughout
 
-Give the exact path(s) created or updated and briefly describe what each contains. If only advice or feedback was requested, make no file changes.
+### Scanability
+
+- Bold key terms, method names, labels, assumptions, conditions, distinctions, and result cues
+- Bold important phrases only; no full bold paragraphs
+- Informative headings; shallow hierarchy; one idea per bullet where practical
+- Avoid paragraphs, dense prose, redundant statements, and repeated body summaries
+- Preserve necessary specificity; do not compress away conditions, exceptions, or interpretation
+
+### Callouts
+
+Use restrained native Obsidian callouts only when the role is clear:
+
+- `[!abstract]` — scope and compact guide map; required at start of lecture guide
+- `[!tip]` — useful strategy or recognition cue
+- `[!info]` — qualification or clarification
+- `[!example]` — short worked example
+- `[!warning]` — important condition or common pitfall
+- `[!success]-` — collapsed answer key, only when requested
+- Concise callouts; no nested callouts; no whole-note callout
+- No decorative callouts or color
+
+### Math and links
+
+- Inline math: `$...$`
+- Display math: `$$...$$` on separate lines
+- No `\(...\)` or `\[...\]` delimiters
+- Attach display equations to the introducing bullet; group symbols, conditions, and interpretation nearby
+- Markdown tables: avoid unescaped `|` inside math; use `\lvert ... \rvert` or move formula outside table
+- Link primary course source near the top when useful; include sources actually used
+- Check every Obsidian link and vault path
+- No custom CSS or font instructions unless requested
+
+## 6. Verify before saving
+
+- **Coverage:** all core items within requested scope; no important method or condition omitted
+- **Accuracy:** correct terminology, formulas, assumptions, examples, and outcomes; uncertainty flagged or verified
+- **Actionability:** procedures executable in order; inputs and checks clear
+- **Clarity:** concise fragments; no complete sentences; no prose paragraphs; labels meaningful
+- **Separation:** lecture guide usable as a practical guide; revision section compact and non-duplicative
+- **Formatting:** correct hierarchy, indentation, bolding, callouts, math, and links
+- **Vault quality:** workflow-compliant locations; useful existing content preserved
+- **Source integrity:** no fabricated examples, citations, errors, or exam predictions
+
+## 7. Report the result
+
+- Exact path(s) created or updated
+- Brief artifact description
+- Headings or bullets only; no complete sentences; no extended explanation
