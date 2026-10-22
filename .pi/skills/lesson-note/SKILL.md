@@ -5,18 +5,32 @@ description: Create source-grounded, concise step-by-step lesson guides and clea
 
 # Lesson-note authoring
 
-Create **concise, practical lesson guides**, not teaching notes, lecture transcripts, or extended explanations. Preserve the original source coverage and useful structure while making the result easy to scan and follow.
+Create **concise, practical lesson guides**, not teaching notes, lecture transcripts, or extended explanations. Preserve source coverage and useful structure. Clarity and compliance are mandatory.
+
+## Binding requirements for every agent
+
+**This skill is an operating standard, not optional guidance. Noncompliant work is unacceptable and must not be delivered.**
+
+- Applies to every agent creating, editing, reviewing, or reporting on lesson-note artifacts
+- Includes the primary agent, every delegated agent, every subagent, and every external writing agent
+- Every contributing agent must read and follow this skill before starting lesson-note work
+- The delegating agent must transmit these requirements to every delegated writer and inspect all returned work
+- No agent may weaken, ignore, reinterpret, or replace these requirements with its own defaults
+- Before saving or reporting, the responsible agent must correct every detected violation and re-check the complete artifact
+- Exceptions only for a direct user instruction explicitly changing a specific requirement; all other requirements remain binding
 
 ## Non-negotiable output style
 
-- **Headings, bullet lists, numbered lists, checklists, tables, equations, and callouts only**
-- **No prose paragraphs**
-- **No complete sentences** anywhere in lesson or revision notes
-- Short noun phrases, labels, fragments, and compact action phrases only
-- Numbered steps as short action fragments, one action per step
-- No sentence-ending periods
-- No conversational transitions, filler, repeated summaries, or introductory prose
-- Compact but sufficient detail for correct use; clarity over extreme compression
+**Every lesson and revision artifact must satisfy every applicable rule below. Any violation requires revision before delivery.**
+
+- **MUST use headings, bullet lists, numbered lists, checklists, tables, equations, and callouts only**
+- **MUST NOT use prose paragraphs**
+- **MUST NOT use complete sentences** anywhere in lesson or revision notes
+- Use short noun phrases, labels, fragments, and compact action phrases only
+- Write numbered steps as short action fragments, one action per step
+- Omit sentence-ending periods
+- Omit conversational transitions, filler, repeated summaries, and introductory prose
+- Keep enough detail for correct use; prioritize clarity over extreme compression
 
 ## 1. Interpret the request and define scope
 
@@ -24,7 +38,8 @@ Create **concise, practical lesson guides**, not teaching notes, lecture transcr
 - Identify course, topic, source set, intended scope, output paths, requested inclusions, exclusions, and depth
 - Treat explicit user requirements as higher priority than defaults
 - Default: concise, self-contained guide; procedural content in ordered steps; concepts in labeled reference bullets
-- No extended motivation, proofs, derivations, broad background, conversational teaching narrative, or unrequested practice questions
+- Every note must end with a **Self-test** section followed by an **Answers** section; **Answers** as the final section
+- No extended motivation, proofs, derivations, broad background, or conversational teaching narrative
 - If a material choice remains unclear—source, scope, replacement of existing content—ask one focused question
 - Otherwise draft directly; no format or outline approval request
 
@@ -89,6 +104,18 @@ Use this template as a scaffold, not a mandatory set of empty sections. Omit irr
 
 - [[<primary course source>]]
 - [[<other source actually used>]]
+
+## <next section number>. Self-test
+
+1. <targeted retrieval prompt fragment?>
+2. <targeted retrieval prompt fragment?>
+3. <targeted retrieval prompt fragment?>
+
+## <next section number>. Answers
+
+1. <concise answer fragment>
+2. <concise answer fragment>
+3. <concise answer fragment>
 ```
 
 ### Procedure and method format
@@ -127,7 +154,11 @@ No need to mechanically include every label for every concept. Avoid label-only 
 - Procedures: include formulas beside the relevant step or condition
 - Examples: include only when they clarify application, distinguish cases, or prevent a likely error
 - Worked examples: short, numbered actions; no extended explanatory narrative
-- Practice questions, quizzes, answers, or answer keys: only when requested
+- Every note: 3–5 concise self-test prompts, followed by matching answers as the final section
+- Self-test: retrieval or application of core note content; source-grounded; no trivia or padding
+- Answers: same numbering as prompts; concise, checked, fragment-only; no hints that reveal answers in the prompt section
+- Cumulative revision note: self-test coverage across the guide's current substantive content; refresh after relevant updates
+- Additional quizzes or practice sets: only when requested
 - Common errors: include only when relevant and source-grounded
 - Tables: concise comparisons across a few aligned dimensions only
 
@@ -148,7 +179,8 @@ No need to mechanically include every label for every concept. Avoid label-only 
   - Procedure conditions and numbered steps
   - Result interpretation and limitations
   - Common pitfalls
-  - Practice items only when requested or already required by local conventions
+  - Mandatory note-level self-test and matching answer section at the end
+  - Additional practice items only when requested or required by local conventions
 - Label inferred prioritization as inference when useful; do not claim expected exam appearance without explicit source support
 
 ### Revision-section template
@@ -168,9 +200,21 @@ No need to mechanically include every label for every concept. Avoid label-only 
 
 - **Guide:** [[<lecture guide>]]
 - **Sources:** [[<source>]]
+
+## <next section number>. Self-test
+
+1. <targeted retrieval prompt fragment?>
+2. <targeted retrieval prompt fragment?>
+3. <targeted retrieval prompt fragment?>
+
+## <next section number>. Answers
+
+1. <concise answer fragment>
+2. <concise answer fragment>
+3. <concise answer fragment>
 ```
 
-Use only applicable fields. Number distinct concepts when that improves navigation; avoid numbering every isolated reminder.
+Use only applicable fields. Number distinct concepts when that improves navigation; avoid numbering every isolated reminder. Place a note-level **Self-test** and matching **Answers** section after all topic content and sources; **Answers** must be the final section.
 
 ## 5. Presentation and Obsidian conventions
 
@@ -202,7 +246,7 @@ Use restrained native Obsidian callouts only when the role is clear:
 - `[!info]` — qualification or clarification
 - `[!example]` — short worked example
 - `[!warning]` — important condition or common pitfall
-- `[!success]-` — collapsed answer key, only when requested
+- `[!success]-` — optional collapsed answer section, only when requested
 - Concise callouts; no nested callouts; no whole-note callout
 - No decorative callouts or color
 
@@ -217,16 +261,20 @@ Use restrained native Obsidian callouts only when the role is clear:
 - Check every Obsidian link and vault path
 - No custom CSS or font instructions unless requested
 
-## 6. Verify before saving
+## 6. Mandatory compliance check before saving
+
+**Do not save, publish, or report a lesson-note artifact until every applicable check passes. Revise and repeat this check after any change.**
 
 - **Coverage:** all core items within requested scope; no important method or condition omitted
 - **Accuracy:** correct terminology, formulas, assumptions, examples, and outcomes; uncertainty flagged or verified
 - **Actionability:** procedures executable in order; inputs and checks clear
 - **Clarity:** concise fragments; no complete sentences; no prose paragraphs; labels meaningful
+- **Self-test:** 3–5 relevant prompts; answer section present; matching checked answers; answers as final section
 - **Separation:** lecture guide usable as a practical guide; revision section compact and non-duplicative
 - **Formatting:** correct hierarchy, indentation, bolding, callouts, math, and links
 - **Vault quality:** workflow-compliant locations; useful existing content preserved
 - **Source integrity:** no fabricated examples, citations, errors, or exam predictions
+- Any failed check: stop delivery, correct the artifact, and re-run the full checklist
 
 ## 7. Report the result
 
